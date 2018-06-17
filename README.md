@@ -23,10 +23,17 @@ Installation
 4. Use Xcode and your coding activity will be displayed on your [WakaTime dashboard](https://wakatime.com).
 
 
+To install WakaTime for Xcode Beta, run this instead of step 1:
+
+  ```
+  curl -fsSL https://raw.githubusercontent.com/wakatime/xcode-wakatime/master/install.sh | sh -s beta
+  ```
+
+
 To clone your `Xcode.app` to preserve the original app signature, run this instead of step 1:
 
   ```
-  curl -fsSL https://raw.githubusercontent.com/wakatime/xcode-wakatime/master/install.sh copy | sh
+  curl -fsSL https://raw.githubusercontent.com/wakatime/xcode-wakatime/master/install.sh | sh -s copy
   ```
 
 Screen Shots
@@ -38,16 +45,28 @@ Screen Shots
 Troubleshooting
 ---------------
 
-Try running this Terminal command:
+Try re-installing, which fixes most problems related to upgrading Xcode:
 
 ```
-curl -fsSL https://raw.githubusercontent.com/wakatime/xcode-wakatime/master/WakaTime/install_dependencies.sh | sh
+curl -fsSL https://raw.githubusercontent.com/wakatime/xcode-wakatime/master/install.sh | sh
 ```
-
-That will re-download the [wakatime-cli dependency](https://github.com/wakatime/wakatime).
 
 If that doesn't work, turn on debug mode and check your wakatime cli log file (`~/.wakatime.log`).
 
 If there are no errors in your `~/.wakatime.log` file, check your Xcode log file (`/var/log/system.log`).
 
 For more general troubleshooting information, see [wakatime/wakatime#troubleshooting](https://github.com/wakatime/wakatime#troubleshooting).
+
+
+Uninstalling
+------------
+
+To uninstall the WakaTime plugin, config file, and Alcatraz run these Terminal commands:
+
+    rm -r "${HOME}/Library/Application Support/Developer/Shared/Xcode/Plug-ins/WakaTime.xcplugin"
+    rm "${HOME}/.wakatime.cfg"
+    rm -r "${HOME}/Library/Application Support/Developer/Shared/Xcode/Plug-ins/Alcatraz.xcplugin"
+
+The config file contains your API Key, so make sure to at least run the first two commands.
+Uninstalling Alcatraz is optional, and will prevent other non-WakaTime plugins from loading.
+After uninstalling, restart Xcode and you should no longer see WakaTime under the `File` menu.
